@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Ekonomi Kabupaten Gunungkidul 2021–2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0d2340;
+            --blue: #1a4a8a;
+            --mid-blue: #2563b0;
+            --accent: #f0a500;
+            --accent2: #e05c2a;
+            --light: #e8f0fb;
+            --white: #ffffff;
+            --gray: #c8d6e8;
+            --text-dark: #0a1828;
+            --text-light: #e8f0fb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--navy);
+            overflow: hidden;
+        }
+
+        /* ---- SLIDE CONTAINER ---- */
+        #slideshow {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: none;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .slide.enter-zoom {
+            animation: enterZoom 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .slide.exit-zoom {
+            animation: exitZoom 0.5s ease-in forwards;
+        }
+
+        .slide.enter-from-right {
+            animation: enterRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .slide.exit-to-left {
+            animation: exitLeft 0.5s ease-in forwards;
+        }
+
+        .slide.enter-from-left {
+            animation: enterLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .slide.exit-to-right {
+            animation: exitRight 0.5s ease-in forwards;
+        }
+
+        @keyframes enterZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes exitZoom {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(1.12);
+            }
+        }
+
+        @keyframes enterRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes exitLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+        }
+
+        @keyframes enterLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes exitRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+        }
+
+        /* ---- BACKGROUNDS ---- */
+        .bg-cover {
+            background: linear-gradient(135deg, #0a1828 0%, #0d2340 40%, #1a3a6e 80%, #0d2340 100%);
+        }
+
+        .bg-section {
+            background: linear-gradient(160deg, #0d2340 0%, #122d52 60%, #0a1f3a 100%);
+        }
+
+        .bg-data {
+            background: linear-gradient(145deg, #0a1828 0%, #0f2540 50%, #112a4a 100%);
+        }
+
+        /* Grid/pattern overlay */
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .radial-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(37, 99, 176, 0.25) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* ---- COVER SLIDE ---- */
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 48px;
+        }
+
+        .cover-tag {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(240, 165, 0, 0.4);
+            padding: 6px 20px;
+            border-radius: 2px;
+            margin-bottom: 32px;
+            animation: fadeUp 0.8s 0.2s both;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 68px);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 16px;
+            animation: fadeUp 0.8s 0.4s both;
+        }
+
+        .cover-title span {
+            color: var(--accent);
+        }
+
+        .cover-subtitle {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--gray);
+            font-weight: 300;
+            margin-bottom: 48px;
+            animation: fadeUp 0.8s 0.6s both;
+        }
+
+        .cover-year-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s 0.8s both;
+        }
+
+        .cover-year {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 2.5vw, 28px);
+            font-weight: 700;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 22px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .cover-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 36px auto;
+            animation: fadeUp 0.8s 0.7s both;
+        }
+
+        .cover-source {
+            font-size: 12px;
+            color: rgba(200, 214, 232, 0.5);
+            letter-spacing: 1px;
+            animation: fadeUp 0.8s 1s both;
+        }
+
+        .cover-dec {
+            position: absolute;
+            border: 1px solid rgba(240, 165, 0, 0.15);
+            border-radius: 50%;
+        }
+
+        .cover-dec-1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -150px;
+        }
+
+        .cover-dec-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -100px;
+            left: -80px;
+        }
+
+        .cover-dec-3 {
+            width: 200px;
+            height: 200px;
+            bottom: -60px;
+            left: -40px;
+            border-color: rgba(37, 99, 176, 0.2);
+        }
+
+        /* ---- SECTION HEADER SLIDE ---- */
+        .section-header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 48px;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(80px, 12vw, 160px);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.04);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .section-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+            animation: fadeUp 0.6s 0.2s both;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            animation: fadeUp 0.6s 0.3s both;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 52px);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            animation: fadeUp 0.6s 0.4s both;
+        }
+
+        .section-bar {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 24px auto;
+            animation: fadeUp 0.6s 0.5s both;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 300;
+            animation: fadeUp 0.6s 0.6s both;
+        }
+
+        /* ---- DATA SLIDE ---- */
+        .data-slide {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 48px;
+        }
+
+        .data-slide-header {
+            margin-bottom: 32px;
+            animation: fadeUp 0.6s 0.1s both;
+        }
+
+        .data-slide-label {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .data-slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 38px);
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .data-slide-sub {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 300;
+            margin-top: 4px;
+        }
+
+        /* ---- CHART BARS ---- */
+        .chart-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeUp 0.5s both;
+        }
+
+        .chart-year {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 16px;
+            width: 40px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .chart-bar-track {
+            flex: 1;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+            background: linear-gradient(90deg, var(--blue), var(--mid-blue));
+            min-width: 60px;
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 0;
+            /* animated in by JS */
+        }
+
+        .chart-bar-fill.accent {
+            background: linear-gradient(90deg, #b84a00, var(--accent2));
+        }
+
+        .chart-bar-fill.green {
+            background: linear-gradient(90deg, #1a6b3a, #28a85a);
+        }
+
+        .chart-bar-fill.teal {
+            background: linear-gradient(90deg, #0a5a5a, #0e9e9e);
+        }
+
+        .chart-val {
+            width: 70px;
+            color: var(--gray);
+            font-size: 14px;
+            text-align: left;
+            flex-shrink: 0;
+        }
+
+        .chart-note {
+            font-size: 11px;
+            color: rgba(200, 214, 232, 0.4);
+            margin-top: 8px;
+            animation: fadeUp 0.5s 0.7s both;
+        }
+
+        /* ---- TREND HIGHLIGHT ---- */
+        .trend-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .trend-card {
+            flex: 1;
+            min-width: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 16px 18px;
+            animation: fadeUp 0.5s both;
+        }
+
+        .trend-card-year {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .trend-card-val {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 34px);
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .trend-card-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        .trend-card-arrow {
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .arrow-down {
+            color: #4ade80;
+        }
+
+        .arrow-up {
+            color: #f87171;
+        }
+
+        /* ---- PDRB DONUT ---- */
+        .pdrb-layout {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .pdrb-donut-wrap {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeUp 0.5s 0.2s both;
+        }
+
+        .pdrb-donut-wrap svg {
+            width: 200px;
+            height: 200px;
+        }
+
+        .donut-label {
+            font-size: 12px;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .pdrb-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pdrb-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeUp 0.5s both;
+        }
+
+        .pdrb-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .pdrb-name {
+            font-size: 14px;
+            color: var(--white);
+            flex: 1;
+        }
+
+        .pdrb-pct {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--accent);
+            width: 54px;
+            text-align: right;
+        }
+
+        .pdrb-bar-mini {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdrb-bar-mini-fill {
+            height: 100%;
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 0;
+        }
+
+        /* ---- CLOSING SLIDE ---- */
+        .closing-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 48px;
+        }
+
+        .closing-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 52px);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            animation: fadeUp 0.6s 0.2s both;
+        }
+
+        .closing-stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+            animation: fadeUp 0.6s 0.4s both;
+        }
+
+        .closing-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px 28px;
+            text-align: center;
+        }
+
+        .closing-stat-val {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 34px);
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .closing-stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .closing-footer {
+            font-size: 12px;
+            color: rgba(200, 214, 232, 0.4);
+            letter-spacing: 1px;
+            animation: fadeUp 0.6s 0.6s both;
+        }
+
+        /* ---- NAVIGATION ---- */
+        #nav {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(13, 35, 64, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 10px 20px;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            font-size: 20px;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: color 0.2s, background 0.2s;
+            line-height: 1;
+        }
+
+        .nav-btn:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(200, 214, 232, 0.25);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .nav-slide-num {
+            font-size: 12px;
+            color: var(--gray);
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* ---- PROGRESS BAR ---- */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            z-index: 200;
+            transition: width 0.4s;
+        }
+
+        /* ---- PRINT STYLES ---- */
+        @media print {
+
+            html,
+            body {
+                overflow: visible;
+                height: auto;
+                width: 210mm;
+            }
+
+            #nav,
+            #progress {
+                display: none !important;
+            }
+
+            #slideshow {
+                overflow: visible;
+                width: auto;
+                height: auto;
+            }
+
+            .slide {
+                position: relative !important;
+                opacity: 1 !important;
+                pointer-events: all !important;
+                page-break-after: always;
+                width: 210mm;
+                min-height: 148mm;
+                display: flex !important;
+            }
+
+            .chart-bar-fill {
+                width: var(--print-width) !important;
+            }
+
+            .pdrb-bar-mini-fill {
+                width: var(--print-width) !important;
+            }
+
+            .enter-zoom,
+            .exit-zoom,
+            .enter-from-right,
+            .exit-to-left,
+            .enter-from-left,
+            .exit-to-right {
+                animation: none !important;
+            }
+
+            body {
+                background: #0d2340;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Horizontal rule decoration */
+        .h-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.3), transparent);
+            margin: 16px 0;
+        }
+
+        /* Key insight box */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.12), rgba(224, 92, 42, 0.08));
+            border: 1px solid rgba(240, 165, 0, 0.25);
+            border-left: 3px solid var(--accent);
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: var(--light);
+            margin-top: 16px;
+            animation: fadeUp 0.5s 0.8s both;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <div id="slideshow">
+
+        <!-- SLIDE 0: COVER -->
+        <div class="slide bg-cover active" data-index="0">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="cover-dec cover-dec-1"></div>
+            <div class="cover-dec cover-dec-2"></div>
+            <div class="cover-dec cover-dec-3"></div>
+            <div class="cover-content">
+                <div class="cover-tag">Badan Pusat Statistik · Kabupaten Gunungkidul</div>
+                <h1 class="cover-title">Profil Ekonomi<br><span>Kabupaten Gunungkidul</span></h1>
+                <p class="cover-subtitle">Tinjauan Indikator Pembangunan Ekonomi &amp; Sosial</p>
+                <div class="cover-divider"></div>
+                <div class="cover-year-row">
+                    <span class="cover-year">2021</span>
+                    <span class="cover-year">2022</span>
+                    <span class="cover-year">2023</span>
+                    <span class="cover-year">2024</span>
+                    <span class="cover-year">2025*</span>
+                </div>
+                <br>
+                <p class="cover-source">Sumber Data: BPS Kabupaten Gunungkidul · DIY · *Proyeksi/Estimasi</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 1: SECTION - KEMISKINAN -->
+        <div class="slide bg-section" data-index="1">
+            <div class="grid-overlay"></div>
+            <div class="section-number">01</div>
+            <div class="section-header">
+                <span class="section-icon">📉</span>
+                <div class="section-label">Indikator 01</div>
+                <h2 class="section-title">Tingkat<br>Kemiskinan</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">Persentase penduduk miskin terhadap total penduduk Kabupaten Gunungkidul</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: DATA KEMISKINAN -->
+        <div class="slide bg-data" data-index="2">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 01 · BPS Gunungkidul</div>
+                    <div class="data-slide-title">Tingkat Kemiskinan</div>
+                    <div class="data-slide-sub">Persentase Penduduk Miskin (%), 2021–2024</div>
+                </div>
+                <div class="chart-wrap">
+                    <div class="chart-row" style="animation-delay:0.15s">
+                        <div class="chart-year">2021</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="92" style="--print-width:92%"></div>
+                        </div>
+                        <div class="chart-val">17,69%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.25s">
+                        <div class="chart-year">2022</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="82" style="--print-width:82%"></div>
+                        </div>
+                        <div class="chart-val">15,86%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.35s">
+                        <div class="chart-year">2023</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="81" style="--print-width:81%"></div>
+                        </div>
+                        <div class="chart-val">15,60%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.45s">
+                        <div class="chart-year">2024</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="79" style="--print-width:79%"></div>
+                        </div>
+                        <div class="chart-val">15,18%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.55s">
+                        <div class="chart-year">2025*</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="75" style="--print-width:75%"></div>
+                        </div>
+                        <div class="chart-val">~14,5%</div>
+                    </div>
+                </div>
+                <p class="chart-note">*2025: estimasi berdasarkan tren. Sumber: BPS Kab. Gunungkidul</p>
+                <div class="insight-box">
+                    💡 <strong>Tren Positif:</strong> Angka kemiskinan turun dari 17,69% (2021) menjadi 15,18% (2024) —
+                    penurunan terbesar se-DIY di 2022 (-1,83 poin). Meski begitu, angka ini masih di atas rata-rata DIY
+                    (10,83%) dan nasional (9,03%).
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: SECTION - PERTUMBUHAN EKONOMI -->
+        <div class="slide bg-section" data-index="3">
+            <div class="grid-overlay"></div>
+            <div class="section-number">02</div>
+            <div class="section-header">
+                <span class="section-icon">📈</span>
+                <div class="section-label">Indikator 02</div>
+                <h2 class="section-title">Pertumbuhan<br>Ekonomi</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">Laju pertumbuhan PDRB riil Kabupaten Gunungkidul secara tahunan</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: DATA PERTUMBUHAN EKONOMI -->
+        <div class="slide bg-data" data-index="4">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 02 · BPS Gunungkidul</div>
+                    <div class="data-slide-title">Pertumbuhan Ekonomi</div>
+                    <div class="data-slide-sub">Laju Pertumbuhan PDRB (%), 2021–2025</div>
+                </div>
+                <div class="chart-wrap">
+                    <div class="chart-row" style="animation-delay:0.15s">
+                        <div class="chart-year">2021</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="58" style="--print-width:58%">5,29%</div>
+                        </div>
+                        <div class="chart-val">5,29%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.25s">
+                        <div class="chart-year">2022</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="60" style="--print-width:60%">5,37%</div>
+                        </div>
+                        <div class="chart-val">5,37%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.35s">
+                        <div class="chart-year">2023</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="56" style="--print-width:56%">5,04%</div>
+                        </div>
+                        <div class="chart-val">5,04%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.45s">
+                        <div class="chart-year">2024</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="55" style="--print-width:55%">~4,9%</div>
+                        </div>
+                        <div class="chart-val">~4,9%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.55s">
+                        <div class="chart-year">2025*</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="57" style="--print-width:57%">~5,1%</div>
+                        </div>
+                        <div class="chart-val">~5,1%</div>
+                    </div>
+                </div>
+                <p class="chart-note">*2024–2025: estimasi. Sumber: BPS Kab. Gunungkidul, Bupati Gunungkidul (2023)</p>
+                <div class="insight-box">
+                    💡 <strong>Pemulihan Pasca-Pandemi:</strong> Setelah kontraksi -0,68% di 2020 (dampak COVID-19),
+                    ekonomi Gunungkidul pulih kuat dengan pertumbuhan 5,29% di 2021 dan stabil di kisaran 5% hingga
+                    2023. Komponen terbesar pengeluaran adalah konsumsi rumah tangga.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: SECTION - RASIO GINI -->
+        <div class="slide bg-section" data-index="5">
+            <div class="grid-overlay"></div>
+            <div class="section-number">03</div>
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <div class="section-label">Indikator 03</div>
+                <h2 class="section-title">Rasio Gini<br>(Ketimpangan)</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">Indeks ketimpangan distribusi pendapatan — 0 = sempurna merata, 1 = sangat
+                    timpang</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: DATA RASIO GINI -->
+        <div class="slide bg-data" data-index="6">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 03 · BPS DIY</div>
+                    <div class="data-slide-title">Rasio Gini (Ketimpangan Pendapatan)</div>
+                    <div class="data-slide-sub">Indeks Gini Kabupaten Gunungkidul, 2021–2025</div>
+                </div>
+                <div class="trend-row">
+                    <div class="trend-card" style="animation-delay:0.15s">
+                        <div class="trend-card-year">2021</div>
+                        <div class="trend-card-val">0,316</div>
+                        <div class="trend-card-label">Ketimpangan Rendah</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.25s">
+                        <div class="trend-card-year">2022</div>
+                        <div class="trend-card-val">0,309</div>
+                        <div class="trend-card-label">Terendah se-DIY</div>
+                        <div class="trend-card-arrow arrow-down">▼ Turun</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.35s">
+                        <div class="trend-card-year">2023</div>
+                        <div class="trend-card-val">0,313</div>
+                        <div class="trend-card-label">Sedikit Naik</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.45s">
+                        <div class="trend-card-year">2024</div>
+                        <div class="trend-card-val">0,310</div>
+                        <div class="trend-card-label">Stabil Rendah</div>
+                        <div class="trend-card-arrow arrow-down">▼ Membaik</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.55s">
+                        <div class="trend-card-year">2025*</div>
+                        <div class="trend-card-val">~0,31</div>
+                        <div class="trend-card-label">Proyeksi Stabil</div>
+                    </div>
+                </div>
+                <div class="h-line"></div>
+                <div class="chart-wrap">
+                    <div class="chart-row" style="animation-delay:0.6s">
+                        <div class="chart-year" style="width:80px;font-size:12px;">Gunungkidul</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="32" style="--print-width:32%">0,310</div>
+                        </div>
+                        <div class="chart-val">Rendah ✓</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.7s">
+                        <div class="chart-year" style="width:80px;font-size:12px;">Rata-rata DIY</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill" data-width="44" style="--print-width:44%">0,430</div>
+                        </div>
+                        <div class="chart-val">Sedang</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.8s">
+                        <div class="chart-year" style="width:80px;font-size:12px;">Kota Yogya</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill accent" data-width="53" style="--print-width:53%">0,519</div>
+                        </div>
+                        <div class="chart-val">Tinggi</div>
+                    </div>
+                </div>
+                <p class="chart-note">*Estimasi. Sumber: BPS DIY, Jurnal Ilmiah MEA 2025</p>
+                <div class="insight-box">
+                    💡 <strong>Ketimpangan Terendah se-DIY:</strong> Gunungkidul secara konsisten mencatatkan Rasio Gini
+                    terendah di DIY, menunjukkan distribusi pendapatan yang relatif merata. Kategori "rendah" (&lt;0,4)
+                    menandakan kesenjangan sosial yang terkendali.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: SECTION - PDRB SEKTORAL -->
+        <div class="slide bg-section" data-index="7">
+            <div class="grid-overlay"></div>
+            <div class="section-number">04</div>
+            <div class="section-header">
+                <span class="section-icon">🏭</span>
+                <div class="section-label">Indikator 04</div>
+                <h2 class="section-title">Sektor Penyumbang<br>PDRB Terbesar</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">Kontribusi lapangan usaha utama terhadap Produk Domestik Regional Bruto</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: DATA PDRB -->
+        <div class="slide bg-data" data-index="8">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 04 · BPS Gunungkidul</div>
+                    <div class="data-slide-title">Struktur PDRB Gunungkidul</div>
+                    <div class="data-slide-sub">Kontribusi Sektor Utama (%), Rata-rata 2021–2024</div>
+                </div>
+                <div class="pdrb-layout">
+                    <div class="pdrb-donut-wrap">
+                        <svg viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)"
+                                stroke-width="32" />
+                            <!-- Pertanian 24.95% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#1a6b3a" stroke-width="32"
+                                stroke-dasharray="125.4 377" stroke-dashoffset="0" transform="rotate(-90 100 100)" />
+                            <!-- Perdagangan 17% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#2563b0" stroke-width="32"
+                                stroke-dasharray="85.5 377" stroke-dashoffset="-125.4"
+                                transform="rotate(-90 100 100)" />
+                            <!-- Konstruksi 11% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#f0a500" stroke-width="32"
+                                stroke-dasharray="55.3 377" stroke-dashoffset="-210.9"
+                                transform="rotate(-90 100 100)" />
+                            <!-- Industri 9% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#e05c2a" stroke-width="32"
+                                stroke-dasharray="45.2 377" stroke-dashoffset="-266.2"
+                                transform="rotate(-90 100 100)" />
+                            <!-- Lainnya 38% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.12)"
+                                stroke-width="32" stroke-dasharray="65.1 377" stroke-dashoffset="-311.4"
+                                transform="rotate(-90 100 100)" />
+                            <text x="100" y="96" text-anchor="middle" fill="white" font-family="Playfair Display"
+                                font-size="18" font-weight="700">PDRB</text>
+                            <text x="100" y="114" text-anchor="middle" fill="#c8d6e8" font-size="11">Gunungkidul</text>
+                        </svg>
+                        <div class="donut-label">Komposisi Sektoral 2023</div>
+                    </div>
+                    <div class="pdrb-list">
+                        <div class="pdrb-item" style="animation-delay:0.15s">
+                            <div class="pdrb-dot" style="background:#1a6b3a"></div>
+                            <div class="pdrb-name">🌾 Pertanian, Kehutanan &amp; Perikanan</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:#1a6b3a" data-width="100"
+                                    style="--print-width:100%"></div>
+                            </div>
+                            <div class="pdrb-pct">24,95%</div>
+                        </div>
+                        <div class="pdrb-item" style="animation-delay:0.25s">
+                            <div class="pdrb-dot" style="background:#2563b0"></div>
+                            <div class="pdrb-name">🛒 Perdagangan Besar &amp; Eceran</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:#2563b0" data-width="68"
+                                    style="--print-width:68%"></div>
+                            </div>
+                            <div class="pdrb-pct">~17%</div>
+                        </div>
+                        <div class="pdrb-item" style="animation-delay:0.35s">
+                            <div class="pdrb-dot" style="background:#f0a500"></div>
+                            <div class="pdrb-name">🏗️ Konstruksi</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:#f0a500" data-width="44"
+                                    style="--print-width:44%"></div>
+                            </div>
+                            <div class="pdrb-pct">~11%</div>
+                        </div>
+                        <div class="pdrb-item" style="animation-delay:0.45s">
+                            <div class="pdrb-dot" style="background:#e05c2a"></div>
+                            <div class="pdrb-name">🏭 Industri Pengolahan</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:#e05c2a" data-width="36"
+                                    style="--print-width:36%"></div>
+                            </div>
+                            <div class="pdrb-pct">~9%</div>
+                        </div>
+                        <div class="pdrb-item" style="animation-delay:0.55s">
+                            <div class="pdrb-dot" style="background:rgba(255,255,255,0.25)"></div>
+                            <div class="pdrb-name">🏨 Akomodasi &amp; Makanan (Pariwisata)</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:rgba(255,255,255,0.4)" data-width="28"
+                                    style="--print-width:28%"></div>
+                            </div>
+                            <div class="pdrb-pct">~7%</div>
+                        </div>
+                        <div class="pdrb-item" style="animation-delay:0.65s">
+                            <div class="pdrb-dot" style="background:rgba(255,255,255,0.12)"></div>
+                            <div class="pdrb-name">📊 Sektor Lainnya</div>
+                            <div class="pdrb-bar-mini">
+                                <div class="pdrb-bar-mini-fill" style="background:rgba(255,255,255,0.2)" data-width="35"
+                                    style="--print-width:35%"></div>
+                            </div>
+                            <div class="pdrb-pct">~31%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-box" style="margin-top:20px">
+                    💡 <strong>Pertanian Dominan:</strong> Sektor pertanian menjadi penyumbang PDRB terbesar dengan
+                    rata-rata 24% selama 2020–2024. Sektor pariwisata (akomodasi &amp; makan minum) terus berkembang
+                    pasca-pandemi seiring dengan meningkatnya kunjungan wisatawan ke pantai-pantai Gunungkidul.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: SECTION - PENGANGGURAN -->
+        <div class="slide bg-section" data-index="9">
+            <div class="grid-overlay"></div>
+            <div class="section-number">05</div>
+            <div class="section-header">
+                <span class="section-icon">👔</span>
+                <div class="section-label">Indikator 05</div>
+                <h2 class="section-title">Tingkat<br>Pengangguran</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">Tingkat Pengangguran Terbuka (TPT) — persentase angkatan kerja yang menganggur
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: DATA PENGANGGURAN -->
+        <div class="slide bg-data" data-index="10">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 05 · BPS Gunungkidul (Sakernas)</div>
+                    <div class="data-slide-title">Tingkat Pengangguran Terbuka (TPT)</div>
+                    <div class="data-slide-sub">Persentase angkatan kerja yang tidak bekerja, 2021–2025</div>
+                </div>
+                <div class="chart-wrap">
+                    <div class="chart-row" style="animation-delay:0.15s">
+                        <div class="chart-year">2021</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill" data-width="28" style="--print-width:28%">2,72%</div>
+                        </div>
+                        <div class="chart-val">2,72%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.25s">
+                        <div class="chart-year">2022</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill" data-width="25" style="--print-width:25%">2,16%</div>
+                        </div>
+                        <div class="chart-val">2,16%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.35s">
+                        <div class="chart-year">2023</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill" data-width="24" style="--print-width:24%">2,09%</div>
+                        </div>
+                        <div class="chart-val">2,09%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.45s">
+                        <div class="chart-year">2024</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="22" style="--print-width:22%">~2,0%</div>
+                        </div>
+                        <div class="chart-val">~2,0%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.55s">
+                        <div class="chart-year">2025*</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill green" data-width="20" style="--print-width:20%">~1,9%</div>
+                        </div>
+                        <div class="chart-val">~1,9%</div>
+                    </div>
+                </div>
+                <div class="h-line"></div>
+                <div class="trend-row">
+                    <div class="trend-card" style="animation-delay:0.5s">
+                        <div class="trend-card-year">TPT 2023</div>
+                        <div class="trend-card-val">2,09%</div>
+                        <div class="trend-card-label">Sangat Rendah</div>
+                        <div class="trend-card-arrow arrow-down">▼ Terus Turun</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.6s">
+                        <div class="trend-card-year">DIY 2023</div>
+                        <div class="trend-card-val">3,84%</div>
+                        <div class="trend-card-label">Rata-rata Provinsi</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.7s">
+                        <div class="trend-card-year">Nasional 2023</div>
+                        <div class="trend-card-val">5,32%</div>
+                        <div class="trend-card-label">Rata-rata Indonesia</div>
+                    </div>
+                </div>
+                <p class="chart-note">*Estimasi. Sumber: BPS Kab. Gunungkidul, Pojok Statistik BPS 2024</p>
+                <div class="insight-box">
+                    💡 <strong>TPT Rendah &amp; Terus Menurun:</strong> Pengangguran Gunungkidul konsisten di bawah 3%,
+                    jauh di bawah rata-rata nasional. Sektor pertanian dan pariwisata menjadi penyerap tenaga kerja
+                    utama.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: SECTION - ANGKATAN KERJA -->
+        <div class="slide bg-section" data-index="11">
+            <div class="grid-overlay"></div>
+            <div class="section-number">06</div>
+            <div class="section-header">
+                <span class="section-icon">👷</span>
+                <div class="section-label">Indikator 06</div>
+                <h2 class="section-title">Tingkat Partisipasi<br>Angkatan Kerja</h2>
+                <div class="section-bar"></div>
+                <p class="section-desc">TPAK — persentase penduduk usia kerja yang aktif di pasar tenaga kerja</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: DATA TPAK -->
+        <div class="slide bg-data" data-index="12">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="data-slide">
+                <div class="data-slide-header">
+                    <div class="data-slide-label">Indikator 06 · BPS Gunungkidul (Sakernas)</div>
+                    <div class="data-slide-title">Tingkat Partisipasi Angkatan Kerja (TPAK)</div>
+                    <div class="data-slide-sub">Persentase penduduk usia kerja yang aktif bekerja/mencari kerja,
+                        2021–2025</div>
+                </div>
+                <div class="chart-wrap">
+                    <div class="chart-row" style="animation-delay:0.15s">
+                        <div class="chart-year">2021</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="72" style="--print-width:72%">72,4%</div>
+                        </div>
+                        <div class="chart-val">72,4%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.25s">
+                        <div class="chart-year">2022</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="74" style="--print-width:74%">74,2%</div>
+                        </div>
+                        <div class="chart-val">74,2%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.35s">
+                        <div class="chart-year">2023</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="76.66" style="--print-width:76.66%">76,66%
+                            </div>
+                        </div>
+                        <div class="chart-val">76,66%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.45s">
+                        <div class="chart-year">2024</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="77" style="--print-width:77%">~77%</div>
+                        </div>
+                        <div class="chart-val">~77%</div>
+                    </div>
+                    <div class="chart-row" style="animation-delay:0.55s">
+                        <div class="chart-year">2025*</div>
+                        <div class="chart-bar-track">
+                            <div class="chart-bar-fill teal" data-width="78" style="--print-width:78%">~78%</div>
+                        </div>
+                        <div class="chart-val">~78%</div>
+                    </div>
+                </div>
+                <div class="h-line"></div>
+                <div class="trend-row">
+                    <div class="trend-card" style="animation-delay:0.5s">
+                        <div class="trend-card-year">TPAK 2023</div>
+                        <div class="trend-card-val">76,66%</div>
+                        <div class="trend-card-label">Gunungkidul</div>
+                        <div class="trend-card-arrow arrow-down">▲ Meningkat</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.6s">
+                        <div class="trend-card-year">DIY 2023</div>
+                        <div class="trend-card-val">~72%</div>
+                        <div class="trend-card-label">Rata-rata Provinsi</div>
+                    </div>
+                    <div class="trend-card" style="animation-delay:0.7s">
+                        <div class="trend-card-year">Nasional 2023</div>
+                        <div class="trend-card-val">69,5%</div>
+                        <div class="trend-card-label">Rata-rata Indonesia</div>
+                    </div>
+                </div>
+                <p class="chart-note">*Estimasi. Sumber: BPS Kab. Gunungkidul, Pojok Statistik BPS 2024</p>
+                <div class="insight-box">
+                    💡 <strong>TPAK Tinggi &amp; Terus Naik:</strong> Partisipasi angkatan kerja Gunungkidul (76,66% di
+                    2023) melampaui rata-rata DIY dan nasional. Ini mencerminkan budaya kerja keras masyarakat agraris
+                    serta tingginya keterlibatan perempuan di sektor pertanian dan informal.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: PENUTUP -->
+        <div class="slide bg-cover" data-index="13">
+            <div class="grid-overlay"></div>
+            <div class="radial-glow"></div>
+            <div class="cover-dec cover-dec-1"></div>
+            <div class="cover-dec cover-dec-2"></div>
+            <div class="closing-content">
+                <div class="cover-tag">Ringkasan Capaian · 2021–2024</div>
+                <h2 class="closing-title">Gunungkidul<br>Terus Bertumbuh</h2>
+                <div class="closing-stats">
+                    <div class="closing-stat">
+                        <div class="closing-stat-val">↓ 2,51%</div>
+                        <div class="closing-stat-label">Penurunan<br>Kemiskinan</div>
+                    </div>
+                    <div class="closing-stat">
+                        <div class="closing-stat-val">5,04%</div>
+                        <div class="closing-stat-label">Pertumbuhan<br>Ekonomi 2023</div>
+                    </div>
+                    <div class="closing-stat">
+                        <div class="closing-stat-val">0,310</div>
+                        <div class="closing-stat-label">Rasio Gini<br>Terendah DIY</div>
+                    </div>
+                    <div class="closing-stat">
+                        <div class="closing-stat-val">2,09%</div>
+                        <div class="closing-stat-label">Pengangguran<br>Terbuka 2023</div>
+                    </div>
+                    <div class="closing-stat">
+                        <div class="closing-stat-val">76,66%</div>
+                        <div class="closing-stat-label">Partisipasi<br>Angkatan Kerja</div>
+                    </div>
+                </div>
+                <div class="cover-divider"></div>
+                <p class="closing-footer">
+                    Sumber: BPS Kabupaten Gunungkidul · BPS DIY · ANTARA · Pojok Statistik BPS 2024<br>
+                    Dipresentasikan: 2025 · Data per Maret 2024 (kecuali disebutkan lain)
+                </p>
+            </div>
+        </div>
+
+    </div><!-- end slideshow -->
+
+    <!-- NAVIGATION -->
+    <div id="nav">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" title="Sebelumnya">&#8592;</button>
+        <div class="nav-dots" id="navDots"></div>
+        <span class="nav-slide-num" id="slideNum">1 / 14</span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)" title="Berikutnya">&#8594;</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        const slideNum = document.getElementById('slideNum');
+        const progress = document.getElementById('progress');
+        let current = 0;
+        let animating = false;
+
+        // Create dots
+        slides.forEach((_, i) => {
+            const d = document.createElement('div');
+            d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            d.onclick = () => goTo(i);
+            navDots.appendChild(d);
+        });
+
+        function updateUI() {
+            const dots = navDots.querySelectorAll('.nav-dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            slideNum.textContent = (current + 1) + ' / ' + slides.length;
+            document.getElementById('prevBtn').disabled = current === 0;
+            document.getElementById('nextBtn').disabled = current === slides.length - 1;
+            progress.style.width = ((current / (slides.length - 1)) * 100) + '%';
+        }
+
+        function animateBars(slide) {
+            setTimeout(() => {
+                slide.querySelectorAll('.chart-bar-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.width + '%';
+                });
+                slide.querySelectorAll('.pdrb-bar-mini-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.width + '%';
+                });
+            }, 400);
+        }
+
+        function goTo(n, dir) {
+            if (animating || n === current) return;
+            animating = true;
+            const prev = slides[current];
+            const next = slides[n];
+            const forward = dir !== undefined ? dir > 0 : n > current;
+
+            // Pick animation type
+            const isZoom = (current === 0 || n === 0 || current === slides.length - 1 || n === slides.length - 1
+                || current % 2 === 1 || n % 2 === 1);
+
+            if (isZoom) {
+                prev.classList.add('exit-zoom');
+                next.classList.add('active', 'enter-zoom');
+            } else if (forward) {
+                prev.classList.add('exit-to-left');
+                next.classList.add('active', 'enter-from-right');
+            } else {
+                prev.classList.add('exit-to-right');
+                next.classList.add('active', 'enter-from-left');
+            }
+
+            setTimeout(() => {
+                prev.classList.remove('active', 'exit-zoom', 'exit-to-left', 'exit-to-right');
+                next.classList.remove('enter-zoom', 'enter-from-right', 'enter-from-left');
+                current = n;
+                updateUI();
+                animateBars(next);
+                animating = false;
+            }, 700);
+        }
+
+        function changeSlide(dir) {
+            const n = current + dir;
+            if (n < 0 || n >= slides.length) return;
+            goTo(n, dir);
+        }
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+            if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+                else document.exitFullscreen();
+            }
+            if (e.key === 'p' || e.key === 'P') { window.print(); }
+        });
+
+        // Touch swipe
+        let touchX = null;
+        document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+        document.addEventListener('touchend', e => {
+            if (touchX === null) return;
+            const dx = touchX - e.changedTouches[0].clientX;
+            if (Math.abs(dx) > 50) changeSlide(dx > 0 ? 1 : -1);
+            touchX = null;
+        });
+
+        // Init
+        updateUI();
+        animateBars(slides[0]);
+        progress.style.width = '0%';
+    </script>
+</body>
+
+</html>
